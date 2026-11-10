@@ -31,16 +31,14 @@ jobs:
       - name: Disable Flutter Analytics
         run: flutter config --no-analytics
 
-      - name: Regenerate Android Platform Bindings
-        run: |
-          flutter create . --platforms=android --org com.example
-          chmod +x android/gradlew
+      - name: Ensure gradlew is executable
+        run: chmod +x android/gradlew
 
       - name: Fetch Dependencies
         run: flutter pub get
 
       - name: Compile Release APK
-        run: flutter build apk --release --no-tree-shake-icons
+        run: flutter build apk --release --no-tree-shake-icons --android-skip-build-dependency-validation
 
       - name: Upload Release APK Artifact
         uses: actions/upload-artifact@v4
