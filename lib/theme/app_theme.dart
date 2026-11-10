@@ -23,8 +23,6 @@ class AppTheme {
       onSecondary: Colors.white,
       surface: Colors.white,
       onSurface: slate900,
-      background: slate50,
-      onBackground: slate900,
       brightness: Brightness.light,
     );
 
@@ -32,7 +30,6 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: colorScheme,
       scaffoldBackgroundColor: slate50,
-      fontFamily: null, // Default system or Roboto
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.white,
         foregroundColor: slate900,
@@ -95,8 +92,8 @@ class AppTheme {
         backgroundColor: Colors.white,
         indicatorColor: primaryLight,
         elevation: 2,
-        labelTextStyle: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.bold,

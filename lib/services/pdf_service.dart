@@ -27,9 +27,20 @@ class PdfService {
       author: settings.founderName,
     );
 
-    final fontRegular = await PdfGoogleFonts.interRegular();
-    final fontMedium = await PdfGoogleFonts.interMedium();
-    final fontBold = await PdfGoogleFonts.interBold();
+    pw.Font fontRegular;
+    pw.Font fontMedium;
+    pw.Font fontBold;
+
+    try {
+      fontRegular = await PdfGoogleFonts.interRegular();
+      fontMedium = await PdfGoogleFonts.interMedium();
+      fontBold = await PdfGoogleFonts.interBold();
+    } catch (_) {
+      // Offline fallback: Use built-in standard PDF Helvetica fonts
+      fontRegular = pw.Font.helvetica();
+      fontMedium = pw.Font.helvetica();
+      fontBold = pw.Font.helveticaBold();
+    }
 
     final dateFormatted = DateFormat('dd MMM yyyy').format(quote.createdAt);
     final validityFormatted = DateFormat('dd MMM yyyy')
